@@ -54,10 +54,10 @@ public class SocketWindowWordCountJavaCheckPoint {
         //设置statebackend
 
         //env.setStateBackend(new MemoryStateBackend());
-        //env.setStateBackend(new FsStateBackend("hdfs://hadoop100:9000/flink/checkpoints"));
-        //env.setStateBackend(new RocksDBStateBackend("hdfs://hadoop100:9000/flink/checkpoints",true));
+        //env.setStateBackend(new FsStateBackend("hdfs://127.0.0.1:9000/flink/checkpoints"));
+        //env.setStateBackend(new RocksDBStateBackend("hdfs://127.0.0.1:9000/flink/checkpoints",true));
 
-        String hostname = "hadoop100";
+        String hostname = "127.0.0.1";
         String delimiter = "\n";
         //连接socket获取输入的数据
         DataStreamSource<String> text = env.socketTextStream(hostname, port, delimiter);

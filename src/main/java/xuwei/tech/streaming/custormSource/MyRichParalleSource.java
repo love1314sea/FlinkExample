@@ -50,6 +50,9 @@ public class MyRichParalleSource extends RichParallelSourceFunction<Long> {
      * 实现获取链接的代码
      * @param parameters
      * @throws Exception
+     *
+     * 参数是从哪里配置的？？
+     *
      */
     @Override
     public void open(Configuration parameters) throws Exception {

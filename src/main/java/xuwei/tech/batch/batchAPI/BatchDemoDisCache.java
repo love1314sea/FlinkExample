@@ -21,6 +21,8 @@ import java.util.List;
  *
  *
  * Created by xuwei.tech on 2018/10/8.
+ * 1 可以用来发布配置
+ * 2 累加器、分布式缓存、广播变量都在RichFunction上操作
  */
 public class BatchDemoDisCache {
 

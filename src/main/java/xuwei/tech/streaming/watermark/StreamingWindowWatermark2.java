@@ -47,7 +47,7 @@ public class StreamingWindowWatermark2 {
         env.setParallelism(1);
 
         //连接socket获取输入的数据
-        DataStream<String> text = env.socketTextStream("hadoop100", port, "\n");
+        DataStream<String> text = env.socketTextStream("127.0.0.1", port, "\n");
 
         //解析输入的数据
         DataStream<Tuple2<String, Long>> inputMap = text.map(new MapFunction<String, Tuple2<String, Long>>() {

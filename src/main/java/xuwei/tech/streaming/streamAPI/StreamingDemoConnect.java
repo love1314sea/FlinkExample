@@ -15,6 +15,11 @@ import xuwei.tech.streaming.custormSource.MyNoParalleSource;
  * 和union类似，但是只能连接两个流，两个流的数据类型可以不同，会对两个流中的数据应用不同的处理方法
  *
  * Created by xuwei.tech on 2018/10/23.
+ *
+ * 问题：
+ * 1 怎么用connect实现配置的动态更新？
+ * 2 connect的两个流在哪里交互？
+ *
  */
 public class StreamingDemoConnect {
 
@@ -35,6 +40,8 @@ public class StreamingDemoConnect {
 
         ConnectedStreams<Long, String> connectStream = text1.connect(text2_str);
 
+        //不同的流抽象成接口是相同的，但是接口传入的对象是不同类型的
+        //两个不同的流，connect后必须返回相同的数据结构么？
         SingleOutputStreamOperator<Object> result = connectStream.map(new CoMapFunction<Long, String, Object>() {
             @Override
             public Object map1(Long value) throws Exception {

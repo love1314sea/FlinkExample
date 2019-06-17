@@ -1,5 +1,6 @@
 package xuwei.tech.streaming;
 
+import org.apache.flink.api.common.JobExecutionResult;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.common.functions.ReduceFunction;
 import org.apache.flink.api.java.tuple.Tuple2;
@@ -30,7 +31,7 @@ public class SocketDemoIncrAgg {
         //获取flink的运行环境
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
-        String hostname = "hadoop100";
+        String hostname = "127.0.0.1";
         String delimiter = "\n";
         //连接socket获取输入的数据
         DataStreamSource<String> text = env.socketTextStream(hostname, port, delimiter);
@@ -44,6 +45,8 @@ public class SocketDemoIncrAgg {
 
         intData.keyBy(0)
                 .timeWindow(Time.seconds(5))
+                //对数据的增量处理：能提高性能，减少资源的使用率
+                //不是通用的process,而是具体功能
                 .reduce(new ReduceFunction<Tuple2<Integer, Integer>>() {
                     @Override
                     public Tuple2<Integer, Integer> reduce(Tuple2<Integer, Integer> value1, Tuple2<Integer, Integer> value2) throws Exception {
@@ -54,8 +57,8 @@ public class SocketDemoIncrAgg {
 
 
         //这一行代码一定要实现，否则程序不执行
-        env.execute("Socket window count");
-
+        JobExecutionResult result = env.execute("Socket window count");
+//        result.get
     }
 
 

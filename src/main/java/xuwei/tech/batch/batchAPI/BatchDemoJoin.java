@@ -54,14 +54,14 @@ public class BatchDemoJoin {
         System.out.println("==================================");
 
         //注意，这里用map和上面使用的with最终效果是一致的。
-        /*text1.join(text2).where(0)//指定第一个数据集中需要进行比较的元素角标
+        text1.join(text2).where(0)//指定第一个数据集中需要进行比较的元素角标
                 .equalTo(0)//指定第二个数据集中需要进行比较的元素角标
                 .map(new MapFunction<Tuple2<Tuple2<Integer,String>,Tuple2<Integer,String>>, Tuple3<Integer,String,String>>() {
                     @Override
                     public Tuple3<Integer, String, String> map(Tuple2<Tuple2<Integer, String>, Tuple2<Integer, String>> value) throws Exception {
                         return new Tuple3<>(value.f0.f0,value.f0.f1,value.f1.f1);
                     }
-                }).print();*/
+                }).print();
 
 
 

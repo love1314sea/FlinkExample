@@ -10,7 +10,7 @@ import org.apache.flink.api.java.tuple.Tuple3;
 import java.util.ArrayList;
 
 /**
- * 获取集合中的前N个元素
+ * 获取集合中的前N个元素和组内排序
  * Created by xuwei.tech on 2018/10/8.
  */
 public class BatchDemoFirstN {

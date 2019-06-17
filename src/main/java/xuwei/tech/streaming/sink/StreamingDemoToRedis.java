@@ -26,7 +26,7 @@ public class StreamingDemoToRedis {
     public static void main(String[] args) throws Exception{
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
-        DataStreamSource<String> text = env.socketTextStream("hadoop100", 9000, "\n");
+        DataStreamSource<String> text = env.socketTextStream("127.0.0.1", 9000, "\n");
 
         //lpsuh l_words word
 

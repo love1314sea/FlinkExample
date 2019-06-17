@@ -23,7 +23,7 @@ object StreamingDataToRedisScala {
     val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment
 
     //链接socket获取输入数据
-    val text = env.socketTextStream("hadoop100",port,'\n')
+    val text = env.socketTextStream("127.0.0.1",port,'\n')
 
     //注意：必须要添加这一行隐式转行，否则下面的flatmap方法执行会报错
     import org.apache.flink.api.scala._

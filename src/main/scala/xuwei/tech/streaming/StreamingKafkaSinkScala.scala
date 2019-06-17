@@ -32,10 +32,10 @@ object StreamingKafkaSinkScala {
 
     //设置statebackend
 
-    //env.setStateBackend(new RocksDBStateBackend("hdfs://hadoop100:9000/flink/checkpoints",true));
+    //env.setStateBackend(new RocksDBStateBackend("hdfs://127.0.0.1:9000/flink/checkpoints",true));
 
 
-    val text = env.socketTextStream("hadoop100",9001,'\n')
+    val text = env.socketTextStream("127.0.0.1",9001,'\n')
 
 
     val topic = "t1"

@@ -37,6 +37,7 @@ public class BatchDemoCounter {
         //获取运行环境
         ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
 
+
         DataSource<String> data = env.fromElements("a", "b", "c", "d");
 
         DataSet<String> result = data.map(new RichMapFunction<String, String>() {
@@ -44,6 +45,7 @@ public class BatchDemoCounter {
             //1:创建累加器
            private IntCounter numLines = new IntCounter();
 
+           // RichFunction 接口中open方法的 Configuration 参数从哪里来的？
             @Override
             public void open(Configuration parameters) throws Exception {
                 super.open(parameters);
@@ -68,7 +70,7 @@ public class BatchDemoCounter {
         result.writeAsText("d:\\data\\count10");
 
         JobExecutionResult jobResult = env.execute("counter");
-        //3：获取累加器
+        //3：获取累加器 :底层使用了 方法范型，返回时候进行转换
         int num = jobResult.getAccumulatorResult("num-lines");
         System.out.println("num:"+num);
 

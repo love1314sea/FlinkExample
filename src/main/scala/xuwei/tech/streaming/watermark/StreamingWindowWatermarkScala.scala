@@ -31,7 +31,7 @@ object StreamingWindowWatermarkScala {
 
     env.setParallelism(1)
 
-    val text = env.socketTextStream("hadoop100",port,'\n')
+    val text = env.socketTextStream("127.0.0.1",port,'\n')
 
     val inputMap = text.map(line=>{
       val arr = line.split(",")

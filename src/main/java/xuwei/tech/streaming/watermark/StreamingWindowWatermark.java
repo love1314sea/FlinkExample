@@ -44,13 +44,13 @@ public class StreamingWindowWatermark {
         env.setParallelism(1);
 
         //连接socket获取输入的数据
-        DataStream<String> text = env.socketTextStream("hadoop100", port, "\n");
+        DataStream<String> text = env.socketTextStream("127.0.0.1", port, "\n");
 
         //解析输入的数据
         DataStream<Tuple2<String, Long>> inputMap = text.map(new MapFunction<String, Tuple2<String, Long>>() {
             @Override
             public Tuple2<String, Long> map(String value) throws Exception {
-                String[] arr = value.split(",");
+                String[] arr = value.split(","); //需要捕获异常，不能让程序抛出，否则进程停止
                 return new Tuple2<>(arr[0], Long.parseLong(arr[1]));
             }
         });
@@ -97,7 +97,7 @@ public class StreamingWindowWatermark {
                      */
                     @Override
                     public void apply(Tuple tuple, TimeWindow window, Iterable<Tuple2<String, Long>> input, Collector<String> out) throws Exception {
-                        String key = tuple.toString();
+                        String key = tuple.toString(); //这个key是做什么的？
                         List<Long> arrarList = new ArrayList<Long>();
                         Iterator<Tuple2<String, Long>> it = input.iterator();
                         while (it.hasNext()) {

@@ -33,10 +33,10 @@ public class StreamingKafkaSink {
 
         //设置statebackend
 
-        //env.setStateBackend(new RocksDBStateBackend("hdfs://hadoop100:9000/flink/checkpoints",true));
+        //env.setStateBackend(new RocksDBStateBackend("hdfs://127.0.0.1:9000/flink/checkpoints",true));
 
 
-        DataStreamSource<String> text = env.socketTextStream("hadoop100", 9001, "\n");
+        DataStreamSource<String> text = env.socketTextStream("127.0.0.1", 9001, "\n");
 
         String brokerList = "hadoop110:9092";
         String topic = "t1";
@@ -54,6 +54,7 @@ public class StreamingKafkaSink {
 
         //使用仅一次语义的kafkaProducer
         FlinkKafkaProducer011<String> myProducer = new FlinkKafkaProducer011<>(topic, new KeyedSerializationSchemaWrapper<String>(new SimpleStringSchema()), prop, FlinkKafkaProducer011.Semantic.EXACTLY_ONCE);
+
         text.addSink(myProducer);
 
 

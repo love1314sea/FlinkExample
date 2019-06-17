@@ -33,7 +33,7 @@ public class StreamingKafkaSource {
 
         //设置statebackend
 
-        //env.setStateBackend(new RocksDBStateBackend("hdfs://hadoop100:9000/flink/checkpoints",true));
+//        env.setStateBackend(new RocksDBStateBackend("hdfs://127.0.0.1:9000/flink/checkpoints",true));
 
 
         String topic = "t1";

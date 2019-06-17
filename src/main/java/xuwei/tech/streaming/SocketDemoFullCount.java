@@ -34,7 +34,7 @@ public class SocketDemoFullCount {
         //获取flink的运行环境
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
-        String hostname = "hadoop100";
+        String hostname = "127.0.0.1";
         String delimiter = "\n";
         //连接socket获取输入的数据
         DataStreamSource<String> text = env.socketTextStream(hostname, port, delimiter);
@@ -47,8 +47,9 @@ public class SocketDemoFullCount {
         });
 
         intData.keyBy(0)
-                .timeWindow(Time.seconds(5))
+                .timeWindow(Time.seconds(5)) //1 使用具体的timeWindowApi  2 一个参数就是翻滚窗口
                 .process(new ProcessWindowFunction<Tuple2<Integer,Integer>, String, Tuple, TimeWindow>() {
+                    //把原来的窗口参数封装在Context中
                     @Override
                     public void process(Tuple key, Context context, Iterable<Tuple2<Integer, Integer>> elements, Collector<String> out)
                             throws Exception {
